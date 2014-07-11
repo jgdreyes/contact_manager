@@ -32,6 +32,14 @@
       <p>Text rendered by Marionette app.</p>
     </script>
 
+    <script type="text/template" id="different-static-template">
+      <p>Text rendered from a different template.</p>
+    </script>
+
+    <script type="text/template" id="list-item-template">
+      <li>One item</li>
+    </script>
+
     <script src="./assets/js/vendor/jquery.js"></script>
     <script src="./assets/js/vendor/json2.js"></script>
     <script src="./assets/js/vendor/underscore.js"></script>
@@ -44,13 +52,19 @@
       });
 
       ContactManager.StaticView = Marionette.ItemView.extend({
+          id: "static-view",
+          tagName: "span",
+          className: "instruction",
           template: "#static-template"
       });
 
       ContactManager.on("initialize:after", function() {
           var staticView;
 
-          staticView = new ContactManager.StaticView();
+          staticView = new ContactManager.StaticView({
+            tagName: "ul",
+            template: "#list-item-template"
+          });
           ContactManager.mainRegion.show(staticView);
       });
 
