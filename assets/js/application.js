@@ -5,24 +5,47 @@ ContactManager.addRegions({
 
 ContactManager.Contact = Backbone.Model.extend({});
 
-ContactManager.ContactView = Marionette.ItemView.extend({
-  template: "#contact-template"
+ContactManager.ContactCollection = Backbone.Collection.extend({
+  model: ContactManager.Contact
 });
 
-ContactManager.on("initialize:after", function() {
-  var alice, aliceView;
+ContactManager.ContactItemView = Marionette.ItemView.extend({
+  tagName: "li",
+  template: "#contact-list-item",
+});
 
-  alice = new ContactManager.Contact({
+ContactManager.ContactsView = Marionette.CollectionView.extend({
+  tagName: "ul",
+  itemView: ContactManager.ContactItemView
+});
+
+
+ContactManager.on("initialize:after", function() {
+  var contacts, contactsListView;
+
+  contacts = new ContactManager.ContactCollection([
+    {
+    firstName: "Bob",
+    lastName: "Bringham",
+    phoneNumber: "555-0163"
+  },
+  {
     firstName: "Alice",
     lastName: "Arten",
-    phoneNumber: "555-0184"
+    phonNumber: "555-0184"
+  },
+  {
+    firstName: "Charlie",
+    lastName: "Campbell",
+    phoneNumber: "555-0129"
+  }
+  ]);
+
+  contactsListView = new ContactManager.ContactsView({
+    collection: contacts
   });
 
-  aliceView = new ContactManager.ContactView({
-    model: alice
-  });
-
-  ContactManager.mainRegion.show(aliceView);
+  ContactManager.mainRegion.show(contactsListView);
 });
 
 ContactManager.start();
