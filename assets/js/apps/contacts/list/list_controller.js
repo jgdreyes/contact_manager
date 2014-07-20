@@ -11,6 +11,10 @@ ContactManager.module(
           collection: contacts
         });
 
+        contactsListView.on("itemview:contact:show", function(childView, model) {
+          ContactManager.ContactsApp.Show.Controller.showContact(model);
+        })
+
         contactsListView.on("itemview:contact:delete", function(childView, model) {
           contacts.remove(model);
         });

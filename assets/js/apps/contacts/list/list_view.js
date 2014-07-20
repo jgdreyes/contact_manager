@@ -7,13 +7,19 @@ ContactManager.module(
 
       events: {
         "click": "highlightName",
-
+        "click td a.js-show": "showClicked",
         "click button.js-delete": "deleteClicked"
       },
 
       highlightName: function(jsEvent) {
         jsEvent.preventDefault();
         this.$el.toggleClass("warning");
+      },
+
+      showClicked: function(jsEvent) {
+        jsEvent.preventDefault();
+        jsEvent.stopPropagation();
+        this.trigger("contact:show", this.model);
       },
 
       deleteClicked: function(jsEvent) {
