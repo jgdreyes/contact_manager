@@ -6,11 +6,26 @@ ContactManager.module(
       template: "#contact-list-item",
 
       events: {
-        click: "highlightName"
+        "click": "highlightName",
+
+        "click button.js-delete": "deleteClicked"
       },
 
-      highlightName: function() {
+      highlightName: function(jsEvent) {
+        jsEvent.preventDefault();
         this.$el.toggleClass("warning");
+      },
+
+      deleteClicked: function(jsEvent) {
+        jsEvent.stopPropagation();
+        this.trigger("contact:delete", this.model);
+      },
+
+      remove: function() {
+        var self = this;
+        this.$el.fadeOut(function() {
+          Marionette.ItemView.prototype.remove.call(self);
+        });
       }
     });
 
