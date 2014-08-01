@@ -13,7 +13,7 @@ ContactManager.module(
     initializeContacts = function() {
       contacts = new Entities.ContactCollection([
         { id: 1, firstName: "Bob", lastName: "Bringham", phoneNumber: "555-0163" },
-        { id: 2, firstName: "Alice", lastName: "Arten", phonNumber: "555-0184" },
+        { id: 2, firstName: "Alice", lastName: "Arten", phoneNumber: "555-0184" },
         { id: 3, firstName: "Charlie", lastName: "Campbell", phoneNumber: "555-0129" }
       ]);
     };
